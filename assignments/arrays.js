@@ -63,17 +63,70 @@ let inventory = [{"id":1,"car_make":"Lincoln","car_model":"Navigator","car_year"
 
 // ==== Challenge 1 ====
 // The dealer can't recall the information for a car with an id of 33 on his lot. Help the dealer find out which car has an id of 33 by logging the car's year, make, and model in the console log provided to you below:
-console.log(`Car 33 is a *car year goes here* *car make goes here* *car model goes here*` );
+console.log(`Car 33 is a ${inventory[32].car_make} (*car make goes here*) ${inventory[32].car_model} (*car model goes here*)` );
 
 // ==== Challenge 2 ====
 // The dealer needs the information on the last car in their inventory.  What is the make and model of the last car in the inventory?  Log the make and model into the console.
 let lastCar = 0;
-console.log();
+console.log(inventory[inventory.length-1].car_make, inventory[inventory.length-1].car_model);
 
 // ==== Challenge 3 ====
 // The marketing team wants the car models listed alphabetically on the website. Sort all the car model names into alphabetical order and log the results in the console
 let carModels = [];
-console.log();
+
+for (let i=0; i < inventory.length; i++) {
+    carModels.push(inventory[i].car_model);
+}
+
+const mergeSort = (arr) => {
+    if (arr.length === 1 ) {
+        return arr;
+    }
+
+    const middle = Math.floor(arr.length/2);
+    const left = arr.slice(0, middle);
+    const right = arr.slice(middle);
+
+    return merge(
+        mergeSort(left),
+        mergeSort(right)
+    );
+}
+
+const merge = (left, right) => {
+    let result = [];
+    let indexLeft = 0;
+    let indexRight = 0;
+
+    while (indexLeft < left.length && indexRight < right.length) {
+        if (left[indexLeft] < right[indexRight]) {
+            result.push(left[indexLeft]);
+            indexLeft ++;
+        } else {
+            result.push(right[indexRight]);
+            indexRight++;
+        }
+    }
+
+    return result.concat(left.slice(indexLeft)).concat(right.slice(indexRight));
+}
+
+console.log(carModels);
+console.log(mergeSort(carModels));
+
+// split each element into partitions of size 1
+
+// recursively merge adjancent partitions
+
+//   for i = leftPartIdx to rightPartIdx
+
+//     if leftPartHeadValue <= rightPartHeadValue
+
+//       copy leftPartHeadValue
+
+//     else: copy rightPartHeadValue
+
+// copy elements back to original array
 
 // ==== Challenge 4 ====
 // The accounting team needs all the years from every car on the lot. Create a new array from the dealer data containing only the car years and log the result in the console.
