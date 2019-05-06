@@ -147,7 +147,7 @@ const parent = {
     "grandchild": {
       "name": "Sam",
       "age": 30,
-      speak() {
+      speak: function() {
         console.log(this.name);
       }
     },
